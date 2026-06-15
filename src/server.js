@@ -43,7 +43,7 @@ app.post('/callback', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `UPDATE "Pago"
+      `UPDATE pago
          SET estado_pago     = $1,
              actualizado_en  = CURRENT_TIMESTAMP
        WHERE id = $2`,
