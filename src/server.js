@@ -46,7 +46,7 @@ app.post('/callback', async (req, res) => {
       `UPDATE pago
          SET estado_pago     = $1,
              actualizado_en  = CURRENT_TIMESTAMP
-       WHERE payment_number = $2`,
+       WHERE nro_pedido = $2`,
       [estadoTexto, pedidoId]
     );
 
