@@ -30,7 +30,7 @@ app.get('/health', (_req, res) => {
 app.post('/callback', async (req, res) => {
   const { PedidoID, Estado, Fecha, Hora, MetodoPago } = req.body;
 
-  const pedidoId = parseInt(PedidoID, 10);
+  const pedidoId = String(PedidoID).trim();
   const estadoNum = parseInt(Estado, 10);
   const estadoTexto = ESTADO_MAP[estadoNum];
 
@@ -46,7 +46,7 @@ app.post('/callback', async (req, res) => {
       `UPDATE pago
          SET estado_pago     = $1,
              actualizado_en  = CURRENT_TIMESTAMP
-       WHERE id = $2`,
+       WHERE payment_number = $2`,
       [estadoTexto, pedidoId]
     );
 
