@@ -1,24 +1,31 @@
-# TwinDev — Sitio web
+# PagoFácil — Servidor de callbacks
 
-Sitio web de presentación de **TwinDev**: servicios, stack tecnológico, equipo y formulario de contacto para nuevos proyectos.
+Pequeño servidor que **recibe las notificaciones de pago de la pasarela PagoFácil (Bolivia)** y actualiza el estado del pago en la base de datos. Complementa el sistema [escuela](https://github.com/jdguior06/escuela).
+
+> 🎓 Proyecto académico desarrollado en la U.A.G.R.M. (Ingeniería en Sistemas), 2026.
 
 ## Tecnologías
 
-Angular 18, Tailwind CSS, SCSS. Desplegado en Netlify.
+Node.js, Express, PostgreSQL (`pg`).
+
+## Cómo funciona
+
+- `POST /callback`: recibe el pedido y su estado desde PagoFácil y actualiza el pago correspondiente.
+- `GET /health`: verifica que el servidor está activo.
+
+Estados que reconoce: `1` pendiente, `2` pagado, `3` revertido, `4` anulado.
 
 ## Cómo ejecutarlo
 
 ```bash
 npm install
-npm start
+cp .env.example .env
 ```
 
-La aplicación queda disponible en `http://localhost:4200`.
-
-Para generar la versión de producción:
+Completa en `.env` los datos de tu base de datos (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) y el `PORT`. Luego:
 
 ```bash
-npm run build
+npm start
 ```
 
 ## Autor
